@@ -50,7 +50,7 @@ app.get("/", function(req, res) {
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
-  res.sendFile(path.join(__dirname, "saved_articles.html"));
+  res.sendFile(path.join(__dirname, "../scrappermongodb/public/saved_articles.html"));
 });
 
 
