@@ -4,10 +4,17 @@ $("#scrape_btn").on("click",function(){
         // For each one
         for (var i = 0; i < data.length; i++) {
           // Display the apropos information on the page
-          $("#article_section").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+          $("#article_section").append("<div class=" "container panel panel-default" "style=" "padding-top: 5px; padding-bottom: 5px" "id=" "container_5a73b73e86292500110b6ac0" ">"
+          "<div class=" "col-xs-8" ">" + data[i]._id + "</div>" "<a class=" "col-xs-2 btn btn-info notes_article" "value=" "5a73b73e86292500110b6ac0" "data-toggle=" "modal" "data-target=" "#5a73b73e86292500110b6ac0" ">" "Notes" "</a>"
+          "<button class=" "col-xs-2 btn btn-danger delete_article" "value=" "5a73b73e86292500110b6ac0" ">" "Delete Article" "</button>"
+          "<a class=" "col-xs-10" ">" + data[i].title + "<br />" + data[i].link + "</a>" "</div>");
         }
       });
     });
+    //           "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    //     }
+    //   });
+    // });
  
  // Save Article
  $(".save_article").on("click",function(){

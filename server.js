@@ -45,12 +45,12 @@ mongoose.connect("mongodb://localhost/mongoscrapper");
 
 // Main route for home page 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
-  res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/saved_articles.html"));
+  res.sendFile(path.join(__dirname, "saved_articles.html"));
 });
 
 
