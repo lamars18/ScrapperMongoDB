@@ -54,84 +54,72 @@ app.get("/saved_articles", function(req, res) {
 });
 
 
-// Retrieves data from the db and displays as json (Use to determine if data was scrapped and saved to database)
-app.get("/all", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  return db.scrapedData.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-     return res.json(found);
-    }
-  });
-});
-
-
-// Scrape data from one site and place it into the mongodb db
+// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
-   // First, we grab the body of the html with request
-   axios.get("http://nytimes.com/").then(function(response) {
+  // First, we grab the body of the html with request
+  axios.get("http://www.nytimes.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    $("article a").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
+        .children("div h2")
         .text();
       result.link = $(this)
-        .children("a")
+        //.children("a")
         .attr("href");
 
       // Create a new Article using the `result` object built from scraping
-       db.Article.create(result)
+      db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
           console.log(dbArticle);
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
-          return res.json(err);
+          //return res.json(err);
+          console.log(err);
         });
     });
+
     // If we were able to successfully scrape and save an Article, send a message to the client
-    alert("Scrape Complete"); 
+    //res.send("Scrape Complete");
+    res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
   });
 });
- // Route for getting all Articles from the db
+
+// Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
-  return db.Article.find({})
+  db.Article.find({})
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  return db.Article.findOne({ _id: req.params.id })
+  db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
-      return res.json(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
 });
 
@@ -147,16 +135,19 @@ app.post("/articles/:id", function(req, res) {
     })
     .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
-      return res.json(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
 });
 
+// Routes
+// =============================================================
+require("./routes/htmlRoutes.js")(app);
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+// Start the server
+app.listen(PORT, function() {
+  console.log("App running on port " + PORT + "!");
 });
