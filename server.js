@@ -23,7 +23,7 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 
 // Require all models
-var db = require("./models");
+var db = require("./public/models");
 
 //Assigns required port to variable 
 var PORT = 3000;
@@ -89,7 +89,7 @@ app.get("/scrape", function(req, res) {
 
     // If we were able to successfully scrape and save an Article, send a message to the client
     //res.send("Scrape Complete");
-    res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
+   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
   });
 });
 
@@ -105,6 +105,12 @@ app.get("/articles", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+ 
+      // If we were able to successfully scrape and save an Article, send a message to the client
+    //res.send("Scrape Complete");
+   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
+ // });
+    
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -145,7 +151,7 @@ app.post("/articles/:id", function(req, res) {
 
 // Routes
 // =============================================================
-require("./routes/htmlRoutes.js")(app);
+// require("/routes/htmlRoutes.js")(app);
 
 // Start the server
 app.listen(PORT, function() {
