@@ -36,7 +36,7 @@ $('#scrape').on('click', function(event){
     $.getJSON('/articles', function(data){
         //console.log(data);
         for (var i=0; i < data.length; i++){
-            $('#article_section').append(`<div class=container panel panel-default style= padding-top: 5px; padding-bottom: 5px id=container_5a73b73e86292500110b6ac0 > <div class=col-xs-8 ><h4> ${data[i].title} <h4></div> <button class=col-xs-2 btn btn-info notes_article value= 5a73b73e86292500110b6ac0 data-toggle= modal data-target= #5a73b73e86292500110b6ac0 > Notes </a>
+            $('#article_section').append(`<div class=container panel panel-default style= padding-top: 5px; padding-bottom: 5px id=container_5a73b73e86292500110b6ac0 > <div class=col-xs-8 ><h4> ${data[i].title} <h4></div> <button class=col-xs-2 btn btn-info submit_note data-toggle= modal data-target= #5a73b73e86292500110b6ac0 > Notes </a>
                  <button class=col-xs-2 btn btn-danger delete_article value= 5a73b73e86292500110b6ac0 > Delete Article </button> <br>
                   <a class= col-xs-10 >  ${data[i]._id}  <br /> <a href= ${data[i].link}> ${data[i].link}</a> </div> <div class=container> <br>
                   <!-- Modal -->
@@ -91,17 +91,11 @@ $('#scrape').on('click', function(event){
  
  // Delete Article
  $(".delete_article").on("click",function(){
-    //  var article = $(this).attr("value");
-    //  var delete_info = {
-    //      _id: article,
-    //      title: article,
-    //      link: article
-    $(this).attr("value").remove;
-    //  };
-    //  $.post("/delete_article",delete_info,function(data){
-    //      $("#container_" + article).css("display","none");
-    //  })
-    //  console.log(delete_info); 
+     var article = $(this).attr("value");
+     var delete_info = {
+         _id: article
+     }
+     delete_info();
     });
 
     // Save Notes
@@ -135,6 +129,7 @@ $('#scrape').on('click', function(event){
         // Place the body of the note in the body textarea
         $("#bodyinput").val(data.note.body);
       }
+      console.log(submit_note); 
     });
 });
 
