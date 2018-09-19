@@ -59,7 +59,7 @@ app.get("/", function(req, res) {
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
-  res.sendFile(path.join(__dirname, "saved_articles.html"));
+  res.sendFile(path.join(__dirname, "../scrappermongodb/public/saved_articles.html"));
 });
 
 
@@ -98,7 +98,7 @@ app.get("/scrape", function(req, res) {
 
     // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Scrape Complete");
-    //res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
+   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
   });
 });
 
