@@ -33,10 +33,45 @@ $('#scrape').on('click', function(event){
     $.getJSON('/articles', function(data){
         console.log(data);
         for (var i=0; i < data.length; i++){
-            $('#article_section').append(`<div class=" "container panel panel-default" "style=" "padding-top: 5px; padding-bottom: 5px" "id=" "container_5a73b73e86292500110b6ac0" ">"
-                   "<div class=" "col-xs-8" ">" ${data[i]._id} "</div>" "<a class=" "col-xs-2 btn btn-info notes_article" "value=" "5a73b73e86292500110b6ac0" "data-toggle=" "modal" "data-target=" "#5a73b73e86292500110b6ac0" ">" "Notes" "</a>"
-                 "<button class=" "col-xs-2 btn btn-danger delete_article" "value=" "5a73b73e86292500110b6ac0" ">" "Delete Article" "</button>"
-                  "<a class=" "col-xs-10" ">" ${data[i].title} "<br />" ${data[i].link} "</a>" "</div>"`);
+            $('#article_section').append(`<div class=  container panel panel-default style= padding-top: 5px; padding-bottom: 5px id= container_5a73b73e86292500110b6ac0 >                   "<div class=" "col-xs-8" ">" ${data[i]._id} "</div>" "<a class=" "col-xs-2 btn btn-info notes_article" "value=" "5a73b73e86292500110b6ac0" "data-toggle=" "modal" "data-target=" "#5a73b73e86292500110b6ac0" ">" "Notes" "</a>"
+                 <button class= col-xs-2 btn btn-danger delete_article value= 5a73b73e86292500110b6ac0 > Delete Article </button>
+                  <a class= col-xs-10 > ${data[i].title} <br /> ${data[i].link} </a> </div> <div class="container">
+                  <!-- Modal -->
+                  <div class=modal fade id=5a73b73e86292500110b6ac0 role=dialog>
+                      <div class=modal-dialog>
+                          <!-- Modal content-->
+                          <div class=modal-content>
+                              <div class=modal-header>
+                                  <button type=button class=close data-dismiss=modal>&times;</button>
+                                  <h4 class=modal-title>Notes for Article: []</h4>
+                              </div>
+                              <div class=modal-body>
+                                  <div class=note_container panel panel-default>
+              
+                                  </div>
+                                  <div>
+                                      <form>
+                                          <div class=form-group>
+                                              <label for=comment>Comment:</label>
+                                              <textarea class=form-control rows=5 id=note_text_5a73b73e86292500110b6ac0 placeholder=Add a note></textarea>
+                                          </div>
+                                          <button type=submit class=btn btn-default submit_note value=5a73b73e86292500110b6ac0>Submit</button>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+              
+                      </div>
+                  </div>
+              
+              </div>
+              <div class=container panel panel-default style=padding-top: 5px; padding-bottom: 5px id=container_5a73b73e86292500110b6ac0>
+                  <div class=col-xs-8>[]</div>
+                  <a class=col-xs-2 btn btn-info notes_article value=5a73b73e86292500110b6ac0 data-toggle=modal data-target=#5a73b73e86292500110b6ac0>Notes</a>
+                  <button class=col-xs-2 btn btn-danger delete_article value=5a73b73e86292500110b6ac0>Delete Article</button>
+                  <a class=col-xs-10>[]</a>
+              </div>
+              `);
         }
     })
 });
