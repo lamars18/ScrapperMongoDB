@@ -28,12 +28,15 @@ $('#scrape').on('click', function(event){
     event.preventDefault();
 
     $.get('/scrape', function(data){
-        console.log('Added 20 new articles!');
+        alert('Added 20 new articles!');
     });
     $.getJSON('/articles', function(data){
         console.log(data);
         for (var i=0; i < data.length; i++){
-            $('#article_section').append(`<a href='${data[i].link}'>${data[i].link}</a>`);
+            $('#article_section').append(`<div class=" "container panel panel-default" "style=" "padding-top: 5px; padding-bottom: 5px" "id=" "container_5a73b73e86292500110b6ac0" ">"
+                   "<div class=" "col-xs-8" ">" ${data[i]._id} "</div>" "<a class=" "col-xs-2 btn btn-info notes_article" "value=" "5a73b73e86292500110b6ac0" "data-toggle=" "modal" "data-target=" "#5a73b73e86292500110b6ac0" ">" "Notes" "</a>"
+                 "<button class=" "col-xs-2 btn btn-danger delete_article" "value=" "5a73b73e86292500110b6ac0" ">" "Delete Article" "</button>"
+                  "<a class=" "col-xs-10" ">" ${data[i].title} "<br />" ${data[i].link} "</a>" "</div>"`);
         }
     })
 });
