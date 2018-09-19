@@ -57,7 +57,7 @@ app.get("/saved_articles", function(req, res) {
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("https://www.nytimes.com/").then(function(response) {
+  axios.get("http://www.echojs.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
@@ -78,12 +78,12 @@ app.get("/scrape", function(req, res) {
       db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
-          //console.log(dbArticle);
+          console.log(dbArticle);
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
-          //return res.json(err);
-          console.log(err);
+          return res.json(err);
+          //console.log(err);
         });
     });
 
