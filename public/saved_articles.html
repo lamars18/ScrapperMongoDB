@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title> Mongo Scrapper - NY Times Edition</title>
-     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
 <body>
 
@@ -18,7 +19,7 @@
         <ul class="nav navbar-nav">
 
             <li><a href="/saved_articles" id="saved_articles_btn">Saved Articles</a></li>
-            <li><a href="/scrape" id="scrape_btn"><button class="col btn btn-danger"> Scrape</button></a></li>
+            <!-- <li><a class="col btn btn-danger"  id="scrape">Scrape</a> </li> -->
         </ul>
     </div>
 </nav>
@@ -32,11 +33,16 @@ background-size: cover">
         </div>
     </div>
 
+            <div id="article_section">
+            <div id="notes"></div>
+            <div id="titleinput"></div>
+            <div id="bodyinput"></div>
+
     <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px" id="container_5a73b73e86292500110b6ac0">
-        <div class="col-xs-8">[]</div>
+        <div class="col-xs-8"></div>
         <a class="col-xs-2 btn btn-info notes_article" value="5a73b73e86292500110b6ac0" data-toggle="modal" data-target="#5a73b73e86292500110b6ac0">Notes</a>
         <button class="col-xs-2 btn btn-danger delete_article" value="5a73b73e86292500110b6ac0">Delete Article</button>
-        <a class="col-xs-10">[]</a>
+        <a class="col-xs-10"></a>
     </div>
 
 
@@ -48,7 +54,7 @@ background-size: cover">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Notes for Article: []</h4>
+                    <h4 class="modal-title">Notes for Article: </h4>
                 </div>
                 <div class="modal-body">
                     <div class="note_container panel panel-default">
@@ -71,10 +77,10 @@ background-size: cover">
 
 </div>
 <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px" id="container_5a73b73e86292500110b6ac0">
-    <div class="col-xs-8">[]</div>
+    <div class="col-xs-8"></div>
     <a class="col-xs-2 btn btn-info notes_article" value="5a73b73e86292500110b6ac0" data-toggle="modal" data-target="#5a73b73e86292500110b6ac0">Notes</a>
     <button class="col-xs-2 btn btn-danger delete_article" value="5a73b73e86292500110b6ac0">Delete Article</button>
-    <a class="col-xs-10">[]</a>
+    <a class="col-xs-10"></a>
 </div>
 
 
@@ -86,7 +92,7 @@ background-size: cover">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Notes for Article: []</h4>
+                <h4 class="modal-title">Notes for Article: </h4>
             </div>
             <div class="modal-body">
                 <div class="note_container panel panel-default">
@@ -109,10 +115,10 @@ background-size: cover">
 
 </div>
 <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px" id="container_5a73b73e86292500110b6ac0">
-    <div class="col-xs-8">[]</div>
+    <div class="col-xs-8"></div>
     <a class="col-xs-2 btn btn-info notes_article" value="5a73b73e86292500110b6ac0" data-toggle="modal" data-target="#5a73b73e86292500110b6ac0">Notes</a>
     <button class="col-xs-2 btn btn-danger delete_article" value="5a73b73e86292500110b6ac0">Delete Article</button>
-    <a class="col-xs-10">[]</a>
+    <a class="col-xs-10"></a>
 </div>
 
 
@@ -124,7 +130,7 @@ background-size: cover">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Notes for Article: []</h4>
+                <h4 class="modal-title">Notes for Article: </h4>
             </div>
             <div class="modal-body">
                 <div class="note_container panel panel-default">
@@ -147,10 +153,10 @@ background-size: cover">
 
 </div>
 <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px" id="container_5a73b73e86292500110b6ac0">
-    <div class="col-xs-8">[]</div>
+    <div class="col-xs-8"></div>
     <a class="col-xs-2 btn btn-info notes_article" value="5a73b73e86292500110b6ac0" data-toggle="modal" data-target="#5a73b73e86292500110b6ac0">Notes</a>
     <button class="col-xs-2 btn btn-danger delete_article" value="5a73b73e86292500110b6ac0">Delete Article</button>
-    <a class="col-xs-10">[]</a>
+    <a class="col-xs-10"></a>
 </div>
 
 
@@ -162,7 +168,7 @@ background-size: cover">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Notes for Article: []</h4>
+                <h4 class="modal-title">Notes for Article: </h4>
             </div>
             <div class="modal-body">
                 <div class="note_container panel panel-default">
@@ -185,10 +191,10 @@ background-size: cover">
 
 </div>
 <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px" id="container_5a73b73e86292500110b6ac0">
-    <div class="col-xs-8">[]</div>
+    <div class="col-xs-8"></div>
     <a class="col-xs-2 btn btn-info notes_article" value="5a73b73e86292500110b6ac0" data-toggle="modal" data-target="#5a73b73e86292500110b6ac0">Notes</a>
     <button class="col-xs-2 btn btn-danger delete_article" value="5a73b73e86292500110b6ac0">Delete Article</button>
-    <a class="col-xs-10">[]</a>
+    <a class="col-xs-10"></a>
 </div>
 
 
@@ -200,7 +206,7 @@ background-size: cover">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Notes for Article: []</h4>
+                <h4 class="modal-title">Notes for Article: </h4>
             </div>
             <div class="modal-body">
                 <div class="note_container panel panel-default">
@@ -224,6 +230,6 @@ background-size: cover">
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<script src="/assets/css/style.css"></script>
+<!-- <script src="/routes/htmlRoutes.js"></script> -->
 </body>
 </html>

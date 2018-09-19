@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title> Mongo Scrapper - NY Times Edition</title>
-     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <!-- <link rel="stylesheet" type="text/css" href="../public/style.css"> -->
 </head>
-<body style= "background-image: url(assets/img/header.jpg);
--o-background-size: cover;  
-background-size: cover">
+<body>
 
 <nav class="navbar navbar-default nav-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand active" href="/">Home</a>
+            <a class="navbar-brand active" href="/" >Home</a>
         </div>
         <ul class="nav navbar-nav">
 
-            <li><a href="/saved_articles" id="saved_articles_btn">Saved Articles</a></li>
-            <li><a href="/scrape" id="scrape_btn"><button class="col btn btn-danger"> Scrape</button></a></li>
+            <li><a class="col btn btn-danger" id="saved_articles_btn" style= "color: white; ">Save Articles</a></li> <Br>
+            <li><a class="col btn btn-danger"  id="scrape" style= "color: white; ">Scrape</a> </li>
         </ul>
     </div>
 </nav>
@@ -35,10 +33,14 @@ background-size: cover">
 </div>
 
 <div id="article_section">
+<div id="notes"></div>
+<div id="titleinput"></div>
+<div id="bodyinput"></div>
+
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<script src="/assets/css/style.css"></script>
+<!-- <script src="/routes/htmlRoutes.js"></script> -->
 </body>
 </html>
