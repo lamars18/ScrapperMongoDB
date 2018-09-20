@@ -78,25 +78,29 @@ $('#scrape').on('click', function(event){
  // Save Article
  $("#saved_articles_btn").on("click",function(){
      console.log("SAVED");
-     var articles = {
-         title: $(this).attr("title"),
-         link: $(this).attr("link"),
-         // author:$(this).attr(".byline")
-     };
+     app.get("/articles", function(req, res) {
+        // Grab every document in the Articles collection
+        db.Article.find({})
+          .then(function(dbArticle) {
+            // If we were able to successfully find Articles, send them back to the client
+             res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/saved_articles.html"));
+          })
+          .catch(function(err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+          })
+     
      
      $.post("/saved_articles",articles,function (data){
          alert("Articles Saved");
-     });
-    });
-  
+     })
+    })
+});
  
  // Delete Article
  $(".delete_article").on("click",function(){
-     var article = $(this).attr("value");
-     var delete_info = {
-         _id: article
-     }
-     delete_info();
+     $(this).remove();
+     
     });
 
     // Save Notes
@@ -105,6 +109,7 @@ $('#scrape').on('click', function(event){
   $("#notes").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("_id");
+  var baseURL = window.location.origin;
 
   // Now make an ajax call for the Article
   $.ajax({
