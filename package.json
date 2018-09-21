@@ -18,8 +18,15 @@
   },
   "homepage": "https://github.com/lamars18/ScrapperMongoDB#readme",
   "dependencies": {
+    "app": "^0.1.0",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
     "mongojs": "^2.6.0",
-    "morgan": "^1.9.1"
+    "mongoose": "^5.2.16",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "request": "^2.88.0"
   }
 }
