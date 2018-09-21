@@ -1,32 +1,25 @@
 {
-  "name": "node_starter_cheerio",
+  "name": "scrappermongodb",
   "version": "1.0.0",
-  "description": "MongoDb Scrapper",
+  "description": "MongoScrapper",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "node server.js"
   },
-  "author": "Shetia C. Butler Lamar",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "cheerio": "^0.20.0",
-    "express": "^4.13.4",
-    "mongojs": "^2.6.0",
-    "morgan": "^1.9.1",
-    "npm": "^6.4.1",
-    "path": "^0.12.7",
-    "request": "^2.69.0"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lamars18/ScrapperMongoDB.git"
   },
+  "author": "Shetia Butler Lamar",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/lamars18/ScrapperMongoDB/issues"
   },
-  "homepage": "https://github.com/lamars18/ScrapperMongoDB#readme"
+  "homepage": "https://github.com/lamars18/ScrapperMongoDB#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "mongojs": "^2.6.0",
+    "morgan": "^1.9.1"
+  }
 }
