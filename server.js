@@ -23,10 +23,10 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 
 // Require all models
-var db = require("./models");
+var db = require("./public/models");
 
 //Assigns required port to variable 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
@@ -43,37 +43,30 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/mongoscrapper");
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoscrapper";
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
+
 // Main route for home page 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
-  res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/saved_articles.html"));
+  res.sendFile(path.join(__dirname, "../scrappermongodb/public/saved_articles.html"));
 });
 
 
-// Retrieves data from the db and displays as json (Use to determine if data was scrapped and saved to database)
-app.get("/all", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  return db.scrapedData.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-     return res.json(found);
-    }
-  });
-});
-
-
-// Scrape data from one site and place it into the mongodb db
+// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
-   // First, we grab the body of the html with request
-   axios.get("http://nytimes.com/").then(function(response) {
+  // First, we grab the body of the html with request
+  axios.get("http://www.echojs.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
@@ -91,7 +84,7 @@ app.get("/scrape", function(req, res) {
         .attr("href");
 
       // Create a new Article using the `result` object built from scraping
-       db.Article.create(result)
+      db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
           console.log(dbArticle);
@@ -99,39 +92,49 @@ app.get("/scrape", function(req, res) {
         .catch(function(err) {
           // If an error occurred, send it to the client
           return res.json(err);
+          //console.log(err);
         });
     });
+
     // If we were able to successfully scrape and save an Article, send a message to the client
-    alert("Scrape Complete"); 
+    res.send("Scrape Complete");
+   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
   });
 });
- // Route for getting all Articles from the db
+
+// Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
-  return db.Article.find({})
+  db.Article.find({})
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
+ 
+      // If we were able to successfully scrape and save an Article, send a message to the client
+    //res.send("Scrape Complete");
+   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
+ // });
+    
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  return db.Article.findOne({ _id: req.params.id })
+  db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
-      return res.json(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
 });
 
@@ -147,16 +150,31 @@ app.post("/articles/:id", function(req, res) {
     })
     .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
-      return res.json(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      return res.json(err);
+      res.json(err);
     });
 });
 
+// Routes
+// =============================================================
+// require("/routes/htmlRoutes.js")(app);
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
-});
+// Start the server
+// app.listen(PORT, function() {
+//   console.log("App running on port " + PORT + "!");
+// });
+
+// app.listen(PORT, function(){
+//   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+// });
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
+
+
