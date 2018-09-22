@@ -16,6 +16,7 @@ var app = express();
 var logger = require("morgan");
 //Require mongoose for simple validation and query API to help interaction with MongoDB
 var mongoose = require("mongoose");
+var compression = require('compression')
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
