@@ -22,8 +22,14 @@ var mongoose = require("mongoose");
 // It works on the client and on the server
 var axios = require("axios");
 
+// // Require all models
+// var db = require("./public/models");
+
 // Require all models
-var db = require("./public/models");
+var db = require("./public/models")
+var Index = require("./public/models/index")
+var Note = require('./public/models/Note');
+var Article = require('./public/models/Article');
 
 //Assigns required port to variable 
 var PORT = process.env.PORT || 3000;

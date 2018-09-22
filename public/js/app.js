@@ -1,29 +1,4 @@
 // //Scrape Button - posts to the site
-// $("#scrape_btn").on("click",function(){
-//     $.getJSON("/scrape", function(data){
-//         // For each one
-//         for (var i = 0; i < data.length; i++) {
-//     //       // Display the apropos information on the page
-//           $("#article_section").append(
-//         // "<div class=" "container panel panel-default" "style=" "padding-top: 5px; padding-bottom: 5px" "id=" "container_5a73b73e86292500110b6ac0" ">"
-//     //       "<div class=" "col-xs-8" ">" + data[i]._id + "</div>" "<a class=" "col-xs-2 btn btn-info notes_article" "value=" "5a73b73e86292500110b6ac0" "data-toggle=" "modal" "data-target=" "#5a73b73e86292500110b6ac0" ">" "Notes" "</a>"
-//     //       "<button class=" "col-xs-2 btn btn-danger delete_article" "value=" "5a73b73e86292500110b6ac0" ">" "Delete Article" "</button>"
-//     //       "<a class=" "col-xs-10" ">" + data[i].title + "<br />" + data[i].link + "</a>" "</div>");
-//     //     }
-//     //   });
-//     // });
-//               "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-//         }
-//       });
-//     //  $.getJSON('/articles', function(data){
-//     //     for (var i = 0; i < data.length; i++) {
-//     //         //       // Display the apropos information on the page
-//     //               $("#article_section").append(
-//     //                 "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-//     //             }
-//     //  })
-//     });
-// //Scrape Button - posts to the site
 $('#scrape').on('click', function(event){
     event.preventDefault();
 
@@ -36,11 +11,11 @@ $('#scrape').on('click', function(event){
     $.getJSON('/articles', function(data){
         //console.log(data);
         for (var i=0; i < data.length; i++){
-            $('#article_section').append(`<div class=container panel panel-default style= padding-top: 5px; padding-bottom: 5px id=container_5a73b73e86292500110b6ac0 > <div class=col-xs-8 ><h4> ${data[i].title} <h4></div> <button class=col-xs-2 btn btn-info submit_note data-toggle= modal data-target= #5a73b73e86292500110b6ac0 > Notes </a>
-                 <button class=col-xs-2 btn btn-danger delete_article value= 5a73b73e86292500110b6ac0 > Delete Article </button> <br>
-                  <a class= col-xs-10 >  ${data[i]._id}  <br /> <a href= ${data[i].link}> ${data[i].link}</a> </div> <div class=container> <br>
+            $('#article_section').append(`<div class=container panel panel-default style= padding-top: 5px; padding-bottom: 5px id=container_ ${data[i]._id} > <div class=col-xs-8 ><h4> ${data[i].title} </h4></div> <button class=col-xs-2 btn btn-info submit_note data-toggle= modal data-target= #${data[i]._id}  > Notes </a>
+                 <button class=col-xs-2 btn btn-danger delete_article value= ${data[i]._id} > Delete Article </button> <br>
+                  <a class= col-xs-10 > ${data[i]._id}   <br /> <a href= ${data[i].link}> ${data[i].link}</a> </div> <div class=container> <br>
                   <!-- Modal -->
-                  <div class=modal fade id=5a73b73e86292500110b6ac0 role=dialog>
+                  <div class=modal fade id=${data[i]._id} role=dialog>
                       <div class=modal-dialog>
                           <!-- Modal content-->
                           <div class=modal-content>
@@ -56,9 +31,9 @@ $('#scrape').on('click', function(event){
                                       <form>
                                           <div class=form-group>
                                               <label for=comment>Comment:</label>
-                                              <textarea class=form-control rows=5 id=note_text_5a73b73e86292500110b6ac0 placeholder=Add a note></textarea>
+                                              <textarea class=form-control rows=5 id=note_text_${data[i]._id} placeholder=Add a note></textarea>
                                           </div>
-                                          <button type=submit class=btn btn-default submit_note value=5a73b73e86292500110b6ac0>Submit</button>
+                                          <button type=submit class=btn btn-default submit_note value=${data[i]._id}>Submit</button>
                                       </form>
                                   </div>
                               </div>
@@ -106,9 +81,9 @@ $('#scrape').on('click', function(event){
     // Save Notes
  $(".submit_note").on("click",function(){
      // Empty the notes from the note section
-  $("#notes").empty();
+  $("#article_section").empty();
   // Save the id from the p tag
-  var thisId = $(this).attr("_id");
+  var thisId = $(this).attr("${data[i]._id}");
   var baseURL = window.location.origin;
 
   // Now make an ajax call for the Article
@@ -120,20 +95,20 @@ $('#scrape').on('click', function(event){
     .then(function(data) {
       console.log(data);
       // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
+      $("#article_section").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
+      $("#article_section").append("<input id='titleinput' name='title' >");
       // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#article_section").append("<textarea id='bodyinput' name='body'></textarea>");
       // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+      $("#article_section").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
       // If there's a note in the article
       if (data.note) {
         // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
+        $("#article_section").val(data.note.title);
         // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
+        $("#article_section").val(data.note.body);
       }
       console.log(submit_note); 
     });
