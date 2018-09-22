@@ -24,7 +24,6 @@ app.get("/saved_articles", function(req, res) {
   res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/saved_articles.html"));
 });
 
-  
 }
 
 

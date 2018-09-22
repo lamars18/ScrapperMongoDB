@@ -114,9 +114,6 @@ $('#scrape').on('click', function(event){
     });
 });
 
-// When you click the savenote button
-
-//});
 
 
 // Delete Note

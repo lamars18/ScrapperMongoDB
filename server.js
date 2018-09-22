@@ -1,4 +1,5 @@
 // Dependencies
+
 //Require express framework for node 
 var express = require("express");
 //Require bodyParser to parsing response data 
@@ -28,7 +29,7 @@ var axios = require("axios");
 
 // Require all models
 var db = require("./public/models")
-var Index = require("./public/models/index")
+var index = require("./public/models/index")
 var Note = require('./public/models/Note');
 var Article = require('./public/models/Article');
 
@@ -47,9 +48,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-// // Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/mongoscrapper");
-
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoscrapper";
 
@@ -61,9 +59,6 @@ mongoose.connect(MONGODB_URI);
 
 // Main route for home page 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')) ) ;
-// app.get("/", function(req, res) {
-//   res.sendFile(path.join(__dirname, "index.html"));
-// });
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
@@ -123,11 +118,7 @@ app.get("/articles", function(req, res) {
       res.json(err);
     });
  
-      // If we were able to successfully scrape and save an Article, send a message to the client
-    //res.send("Scrape Complete");
-   // res.sendFile(path.join(__dirname, "../ScrapperMongoDB/public/scrape.html"));
- // });
-    
+      
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -165,22 +156,6 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
-
-// Routes
-// =============================================================
-// require("/routes/htmlRoutes.js")(app);
-
-// Start the server
-// app.listen(PORT, function() {
-//   console.log("App running on port " + PORT + "!");
-// });
-
-// app.listen(PORT, function(){
-//   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-// });
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
