@@ -22,6 +22,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
+    "compression": "^1.7.3",
     "express": "^4.16.3",
     "favicon": "0.0.2",
     "mongojs": "^2.6.0",
