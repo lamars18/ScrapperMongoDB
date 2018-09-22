@@ -59,9 +59,10 @@ mongoose.connect(MONGODB_URI);
 
 
 // Main route for home page 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')) ) ;
+// app.get("/", function(req, res) {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 // Route to redirect to html of Saved Articles 
 app.get("/saved_articles", function(req, res) {
